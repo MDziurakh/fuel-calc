@@ -1,6 +1,8 @@
 import React from "react";
 import PriceForm from "../components/PriceForm/PriceForm";
 
+import "./PriceCalcPage.scss";
+
 interface IPriceCalcPage {
   priceConsumption: string;
   allData: Array<{ fuel: number; distance: number; consumption: string }>;
@@ -23,15 +25,13 @@ const PriceCalcPage: React.FC<IPriceCalcPage> = ({
   setPriceFormInput,
   setPriceCalculateInput,
 }) => {
-
-
-  let lastConsumptionCheck = allData.length > 0 ? +allData[allData.length - 1].consumption : "";
+  let lastConsumptionCheck =
+    allData.length > 0 ? +allData[allData.length - 1].consumption : "";
 
   return (
     <div className="price-page-wrapper wrapper">
       <h1>Calculate price of your ride</h1>
-      <div className="price-form-block">
-        
+      <div className="price-form-block form-block">
         <PriceForm
           onPriceCalculate={onPriceCalculate}
           priceCalculateInput={priceCalculateInput}
@@ -42,7 +42,11 @@ const PriceCalcPage: React.FC<IPriceCalcPage> = ({
           setPriceFormInput={setPriceFormInput}
         />
         <div className="price-calc-consumption">
-          {priceConsumption.length ? <h4>{priceConsumption}</h4> : null}
+          <h4>
+            {priceConsumption.length
+              ? priceConsumption 
+              : "Here will be displayed your price"}
+          </h4>
         </div>
       </div>
     </div>

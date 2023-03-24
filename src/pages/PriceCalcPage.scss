@@ -1,0 +1,28 @@
+@import '../scss/variables';
+
+
+
+.price-page-wrapper {
+    .price-form-block {
+      margin: 0 auto;
+      position: relative;
+      .price-form-clear{
+        background-color: $priceFormColor;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        left: 10px;
+      }
+    }
+  }
+
+  .price-form {
+    background-color: $priceFormColor;
+  }
+  
+  .price-calc-consumption {
+    padding-top: 20px;
+  
+  }
+  
+  

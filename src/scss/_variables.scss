@@ -1,0 +1,9 @@
+$color1: #F6F6F6;
+$color2: #1b1bd0;
+$color3: #C1FFD7;
+$color4: #84b3d9;
+$color5: #84d999;
+$contentColor: lighten($color: $color4, $amount: 23);
+$mainFormColor: lighten($color: $color3, $amount: 9);
+$priceFormColor: lighten($color: $color3, $amount: 7);
+$historyPageColor: lighten($color: $color3, $amount: 5);

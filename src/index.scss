@@ -1,40 +1,22 @@
-$color1: #F6F6F6;
-$color2: #1b1bd0;
-$color3: #C1FFD7;
-$color4: #84b3d9;
-$color5: #84d999;
-$contentColor: lighten($color: $color4, $amount: 23);
-$mainFormColor: lighten($color: $color3, $amount: 9);
-$priceFormColor: lighten($color: $color3, $amount: 7);
-$historyPageColor: lighten($color: $color3, $amount: 5);
-
+@import './scss/_variables';
 
 * {
   box-sizing: border-box;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: darken($color: $color4, $amount: 30);
   border-radius: 10px;
 }
 
 body {
   background-color: $color1;
+  margin:0 auto;
 }
 
-html {
-  overflow-x: hidden;
-}
 
-body {
-  margin: 0;
-  width: 100vw;
-}
-
-body>* {
+html{
   overflow-y: scroll;
-  margin-right: -100px;
-  padding-right: 100px;
 }
-
+// min-height: 80vh;
 
 h1,
 h2,
@@ -46,138 +28,99 @@ h6 {
   text-align: center;
 }
 
-.app {
-  max-width: 940px;
-  padding: 0 40px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+h1{
+  font-size: 34px;
+}
+h2{
+  font-size: 28px;
+}
+h4{
+  font-size: 20px;
+  max-width: 350px;
 }
 
-header {
-  padding: 20px 0;
+label{
+  font-size: 20px;
+}
+button{
+  font-size: 14px;
+}
 
-  .header-wrapper {
-    height: 60px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $contentColor;
+@media (max-width:668.9px){
 
-    .logo {
-      position: absolute;
-      top: 5px;
-      left: 40px;
+  h1{
+    max-width: 300px;
+    font-size: 30px;
+  }
+  h2{
+    font-size: 24px;
+  }
 
+  
+  
+  label{
+    font-size: 18px;
+  }
+  button{
+    font-size: 14px;
+  } 
+}
+@media (max-width:568.9px){
+  h1{
+    font-size: 28px;
+    max-width: 280px;
+    padding-bottom: 20px !important;
+  }
+  h2{
+    font-size: 20px;
+  }
+  h4{
+    font-size: 18px;
+    @media (max-width:468.9px){
+      font-size: 14px;
+      max-width: 270px;
       
-      a {
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
-        svg {
-          height: 50px;
-          width: 50px;
-        }
-        .logo-text {
-          font-family: Verdana, Geneva, Tahoma, sans-serif;
-          font-weight: 900;
-          font-size: 21px;
-          text-align: start;
-          max-width: 135px;
-          text-transform: uppercase;
-        }
-      }
     }
-
-    .nav-list {
-      display: flex;
-      justify-content: center;
-      column-gap: 10px;
-
-      button {
-        cursor: auto;
-        background-color: transparent;
-        border: none;
-        padding: 0;
-
-        a {
-          width: 100%;
-          color: chocolate;
-          background-color: antiquewhite;
-          text-decoration: none;
-          padding: 4px 10px;
-          font-size: 16px;
-          font-weight: 700;
-          border-radius: 7px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          opacity: 0.3;
-
-          &.disabled {
-            color: lighten($color: chocolate, $amount: 33);
-            background-color: lighten($color: antiquewhite, $amount: 5);
-
-            &:hover {
-              color: lighten($color: chocolate, $amount: 33);
-              background-color: lighten($color: antiquewhite, $amount: 5);
-              cursor: not-allowed;
-              svg {
-                opacity: 0.3;
-    
-              }
-            }
-          }
-
-          &.active {
-            color: green;
-            background-color: beige;
-            border: 1px solid lighten($color: $color4, $amount: 0);
-            opacity: 1;
-
-            svg {
-              opacity: 1;
-
-            }
-
-            &:hover {
-              color: green;
-              background-color: beige;
-            }
-          }
-
-          &:hover {
-            opacity: 1;
-            color: darken($color: chocolate, $amount: 21);
-
-            background-color: darken($color: antiquewhite, $amount: 13);
-
-            svg {
-              opacity: 1;
-
-            }
-          }
-
-          svg {
-            height: 28px;
-            width: 28px;
-            opacity: 0.3;
-          }
-        }
-      }
-    }
+  }
+  
+  label{
+    font-size: 14px;
   }
 }
 
+button>a>span{
+  font-size: 18px;
+  @media (max-width:468.9px){
+    font-size: 13px;
 
+  }
+}
 
+input{
+  font-size: 18px;
+  @media (max-width:668.9px){
+    font-size: 16px;
 
+  }
+}
+
+.content-wrapper{
+
+  padding: 20px 40px;
+  
+  @media(max-width:768.9px){
+    padding: 20px 40px 100px;
+  }
+  @media(max-width:500.9px){
+    padding: 20px 20px 100px;
+  }
+}
 .content {
+  max-width: 940px;
+  min-height: 66vh;
   background-color: $contentColor;
   padding: 20px 0;
-  min-height: 80vh;
+  margin: 0 auto;
 
   button,
   input[type='submit'] {
@@ -186,12 +129,17 @@ header {
     padding: 5px 14px;
     border: none;
     font-weight: 600;
+    font-size: 18px;
+    @media(max-width:568.9px){
+      font-size: 14px;
+    }
   }
 }
 
 .wrapper {
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
+  padding: 0 20px;
 
   h1 {
     padding: 10px 0 40px;
@@ -199,22 +147,10 @@ header {
 
 }
 
-.main-form-block {
-  position: relative;
-  max-width: 350px;
-  margin: 0 auto;
 
-  .clear-btn {
-    // background-color: lighten($color: $color3, $amount: 9);
-    background-color: $mainFormColor;
-
-    padding: 0;
-    position: absolute;
-    top: 0;
-    left: 10px;
-  }
+div.form-block{
+  max-width: 450px;
 }
-
 form {
   padding: 40px 10px;
   display: flex;
@@ -224,26 +160,11 @@ form {
   row-gap: 20px;
 }
 
-.main-form {
-  background-color: $mainFormColor;
-}
-
-.price-form {
-  background-color: $priceFormColor;
-  position: relative;
-  .price-form-clear{
-    background-color: $priceFormColor;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    left: 10px;
-  }
-}
-
 .input-block {
   display: flex;
   flex-direction: column;
   text-align: left;
+  width: 67%;
 
   label::after {
     content: '*';
@@ -281,8 +202,6 @@ input::placeholder {
 
 }
 
-
-
 button[disabled] {
   border: none;
   cursor: not-allowed;
@@ -296,97 +215,4 @@ input[type='submit']:hover {
 
 input[type='submit']:hover {
   background-color: darken($color: $color3, $amount: 10);
-}
-
-
-
-
-.consumption-block {
-  padding: 20px 0;
-
-  h4 {
-
-    button {
-      position: relative;
-      height: 0;
-      padding: 0;
-
-      svg {
-        transition: transform ease-in-out 0.1s;
-      }
-
-      svg:hover {
-        transform: scale(1.07);
-      }
-
-      svg:active {
-        transform: scale(0.98);
-      }
-
-      span {
-        position: absolute;
-        top: 10px;
-        right: -50px;
-        font-weight: 100;
-        color: $color4;
-      }
-    }
-
-  }
-}
-
-
-.price-page-wrapper {
-  .price-form-block {
-    max-width: 350px;
-    margin: 0 auto;
-  }
-}
-
-.price-calc-consumption {
-  padding: 20px 0;
-
-}
-
-
-.calc-list {
-  background-color: $historyPageColor;
-  list-style: none;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 350px;
-  row-gap: 10px;
-  padding: 20px;
-
-  li {
-    padding: 5px 15px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    background-color: $color1;
-    background-color: lighten($color: $color4, $amount: 13);
-
-    // background-color: darken($color: $color1, $amount: 11);
-    p {
-      display: flex;
-      align-items: center;
-      column-gap: 10px;
-      border-radius: 0px;
-      padding: 0;
-      margin: 0;
-
-      &::before {
-        content: '  ';
-        color: goldenrod;
-        font-weight: 900;
-        font-size: 20px;
-      }
-
-      svg {
-        width: 30px;
-        height: 30px;
-      }
-    }
-  }
 }

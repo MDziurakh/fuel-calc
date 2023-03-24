@@ -1,0 +1,54 @@
+@import '../scss/variables';
+
+.main-form {
+  background-color: $mainFormColor;
+}
+
+.main-form-block {
+  position: relative;
+  max-width: 350px;
+  margin: 0 auto;
+
+  .clear-btn {
+    background-color: $mainFormColor;
+
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 10px;
+  }
+}
+
+.consumption-block {
+  padding-top: 20px;
+
+  h4 {
+
+    button {
+      position: relative;
+      height: 0;
+      padding: 0;
+
+      svg {
+        transition: transform ease-in-out 0.1s;
+      }
+
+      svg:hover {
+        transform: scale(1.07);
+      }
+
+      svg:active {
+        transform: scale(0.98);
+      }
+
+      span {
+        position: absolute;
+        top: 10px;
+        right: -50px;
+        font-weight: 100;
+        color: $color4;
+      }
+    }
+
+  }
+}

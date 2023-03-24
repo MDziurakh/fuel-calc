@@ -56,7 +56,7 @@ const PriceForm: React.FC<IPriceForm> = ({
         Clear form
       </button>
       <form className="price-form" onSubmit={onPriceCalculateClick}>
-        <h2>How much does it cost?</h2>
+        <h2>Enter your data</h2>
         <div className="input-block">
           <label htmlFor="distanceCalc">Distance in km:</label>
           <input

@@ -1,0 +1,98 @@
+@import '../scss/variables';
+
+.history-page-wrapper {
+    padding: 0 20px;
+    .empty-list-svg-container{
+        margin: 0 auto;
+        width: 100px;
+    }
+}
+
+.calc-list {
+    background-color: $historyPageColor;
+    list-style: none;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    row-gap: 10px;
+    padding: 30px 30px 20px;
+
+    position: relative;
+
+    .clear-btn{
+     background-color: $historyPageColor;
+     position: absolute;
+     top: 0;
+     left: 0;   
+    }
+    li {
+        padding: 5px 15px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        background-color: $color1;
+        background-color: lighten($color: $color4, $amount: 13);
+        position: relative;
+
+        >span {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+
+            svg {
+                display: block;
+                width: 30px;
+                height: 30px;
+                border-radius: 0;
+                transition: all ease-in-out 0.1s;
+                path{
+                    stroke: #c19051;
+                }
+                &:hover {
+                    transform: scale(0.9);
+                    
+                    path {
+                        stroke: rgb(218 141 141);
+                    }
+                }
+                &:active {
+                    transform: scale(0.8);
+                    path {
+                        stroke: darken($color: rgb(218 141 141), $amount: 10);
+                    }
+                }
+
+            }
+        }
+
+        p {
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+            border-radius: 0px;
+            padding: 0;
+            margin: 0;
+
+            svg {
+                width: 30px;
+                height: 30px;
+                flex-shrink: 0;
+            }
+
+            @media(max-width:450px) {
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        @media (max-width:450px) {
+            padding: 5px 12px;
+        }
+    }
+
+    @media (max-width:450px) {
+        padding: 24px 12px 12px;
+    }
+}

@@ -2,6 +2,8 @@ import React, { Dispatch } from "react";
 import { IConsumption, INewState } from "../App";
 import ConsumtionForm from "../components/ConsumtionForm/ConsumtionForm";
 
+import "./MainPage.scss";
+
 import { ReactComponent as Copy } from "../assets/icons/copy.svg";
 
 interface IMainPage {
@@ -27,6 +29,9 @@ const MainPage: React.FC<IMainPage> = (props) => {
     inputsData,
   } = props;
 
+  console.log(allData);
+  
+
   return (
     <div className="main-page-wrapper wrapper">
       <h1>
@@ -34,7 +39,7 @@ const MainPage: React.FC<IMainPage> = (props) => {
           ? `Last consumption was ${allData[allData.length - 1].consumption} L`
           : "Calculate your fuel consumption"}
       </h1>
-      <div className="main-form-block">
+      <div className="main-form-block form-block">
         <button
           className="clear-btn"
           onClick={clearStorageData}
@@ -53,7 +58,11 @@ const MainPage: React.FC<IMainPage> = (props) => {
               "Here will be displayed your consumption"
             ) : (
               <>
-                {`Consumption - ${consumption.fuelConsumption} L, price - ${consumption.priceResult} UAH`}
+                {`Consumption - ${consumption.fuelConsumption} L, distance - 
+                ${
+                  allData[allData.length - 1].distance
+                }km
+                , price - ${consumption.priceResult} UAH`}
                 <button
                   className="svg-btn"
                   onClick={onClickCopy}
@@ -62,7 +71,6 @@ const MainPage: React.FC<IMainPage> = (props) => {
                   <Copy height={30} />
                   {copyMessage && <span>Copied!</span>}
                 </button>
-                
               </>
             )}
           </h4>

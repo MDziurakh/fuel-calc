@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import HistoryPage from "./pages/HistoryPage";
 import PriceCalcPage from "./pages/PriceCalcPage";
 import Header from "./components/Header/Header";
 
+import { v4 as uuidv4 } from "uuid";
 
 const App: React.FC = () => {
   // const [consumption, setConsumption] = useState<string>("");
@@ -14,7 +15,7 @@ const App: React.FC = () => {
   });
   const [copyMessage, setCopyMessage] = useState<boolean>(false);
   const [allData, setAllData] = useState<
-    Array<{ fuel: number; distance: number; consumption: string }>
+    Array<{ fuel: number; distance: number; consumption: string; id: string }>
   >([]);
   const [newState, setNewState] = useState<INewState>({
     fuel: 0,
@@ -38,8 +39,14 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log(allData);
     if (allData.length) {
+      console.log(allData);
+
       localStorage.setItem("allData", JSON.stringify(allData));
+    } else {
+      localStorage.removeItem("allData");
+      setConsumption({ fuelConsumption: 0, priceResult: 0 });
     }
   }, [allData]);
 
@@ -57,12 +64,18 @@ const App: React.FC = () => {
     ).toFixed(2);
     let res: IConsumption = { fuelConsumption: +litrage, priceResult: +price };
 
-    const newData = {
+    const newData: {
+      fuel: number;
+      distance: number;
+      consumption: string;
+      id: string;
+    } = {
       fuel: newState.fuel,
       distance: newState.distance,
       consumption: ((newState.fuel / newState.distance) * 100)
         .toFixed(2)
         .toString(),
+      id: uuidv4(),
     };
 
     setConsumption(res);
@@ -81,6 +94,16 @@ const App: React.FC = () => {
       }, 1300);
     } else {
     }
+  };
+
+  const onRemoveCalculateItem = (id: string): void => {
+    const filteredData = allData.filter((dataItem) => dataItem.id !== id);
+    if (!filteredData.length) {
+      console.log(filteredData.length);
+      setAllData([]);
+      return;
+    }
+    setAllData(filteredData);
   };
 
   const clearStorageData = (): void => {
@@ -124,46 +147,57 @@ const App: React.FC = () => {
     }
   };
 
-  const isDisabled = (e: React.MouseEvent<HTMLElement>): void => {
-    !allData.length && e.preventDefault();
-  };
+  // const isDisabled = (e: React.MouseEvent<HTMLElement>): void => {
+  //   !allData.length && e.preventDefault();
+  // };
 
   return (
-    <div className="app">
-      <Header allData={allData} isDisabled={isDisabled}/>
-      <div className="content">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <MainPage
+    <div>
+      <Header allData={allData} />
+      <div className="content-wrapper">
+        <div className="content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  clearStorageData={clearStorageData}
+                  allData={allData}
+                  onSubmitHandler={onSubmitHandler}
+                  setNewState={setNewState}
+                  inputsData={newState}
+                  consumption={consumption}
+                  onClickCopy={onClickCopy}
+                  copyMessage={copyMessage}
+                />
+              }
+            />
+            <Route
+              path="/price-calc"
+              element={
+                <PriceCalcPage
+                  allData={allData}
+                  onPriceCalculate={onPriceCalculate}
+                  priceCalculateInput={priceCalculateInput}
+                  priceConsumption={priceConsumption}
+                  priceFormInput={priceFormInput}
+                  setPriceFormInput={setPriceFormInput}
+                  setPriceCalculateInput={setPriceCalculateInput}
+                />
+              }
+            />
+            <Route
+              path="/history"
+              element={
+                <HistoryPage
                 clearStorageData={clearStorageData}
-                allData={allData}
-                onSubmitHandler={onSubmitHandler}
-                setNewState={setNewState}
-                inputsData={newState}
-                consumption={consumption}
-                onClickCopy={onClickCopy}
-                copyMessage={copyMessage}
-              />
-            }
-          />
-          <Route
-            path="/price-calc"
-            element={
-              <PriceCalcPage
-                allData={allData}
-                onPriceCalculate={onPriceCalculate}
-                priceCalculateInput={priceCalculateInput}
-                priceConsumption={priceConsumption}
-                priceFormInput={priceFormInput}
-                setPriceFormInput={setPriceFormInput}
-                setPriceCalculateInput={setPriceCalculateInput}
-              />
-            }
-          />
-          <Route path="/history" element={<HistoryPage allData={allData} />} />
-        </Routes>
+                  allData={allData}
+                  onRemoveCalculateItem={onRemoveCalculateItem}
+                />
+              }
+            />
+          </Routes>
+        </div>
       </div>
     </div>
   );
@@ -180,4 +214,11 @@ export interface INewState {
 export interface IConsumption {
   priceResult: number;
   fuelConsumption: number;
+}
+
+export interface IAllData {
+  fuel: number;
+  distance: number;
+  consumption: string;
+  id: string;
 }

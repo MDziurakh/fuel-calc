@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import "./Header.scss";
+
 import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 import { ReactComponent as FuelNavSVG } from "../../assets/icons/fuel-nav.svg";
 import { ReactComponent as PriceNavSVG } from "../../assets/icons/price-nav.svg";
@@ -8,10 +10,10 @@ import { ReactComponent as HistoryNavSVG } from "../../assets/icons/history-nav.
 
 interface IHeader {
   allData: Array<{ fuel: number; distance: number; consumption: string }>;
-  isDisabled: (e: React.MouseEvent<HTMLElement>) => void;
+  // isDisabled: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-const Header: React.FC<IHeader> = ({ allData, isDisabled }) => {
+const Header: React.FC<IHeader> = ({ allData }) => {
   return (
     <header>
       <div className="header-wrapper">
@@ -25,23 +27,23 @@ const Header: React.FC<IHeader> = ({ allData, isDisabled }) => {
           <button tabIndex={-1}>
             <NavLink to="/">
               <FuelNavSVG />
-              Main form
+              <span>Fuel form</span>
             </NavLink>
           </button>
           <button tabIndex={-1}>
             <NavLink to="/price-calc">
               <PriceNavSVG />
-              Price form
+              <span>Price form</span>
             </NavLink>
           </button>
           <button tabIndex={-1}>
             <NavLink
-              className={!allData.length ? "disabled" : ""}
+              // className={!allData.length ? "disabled" : ""}
               to="/history"
-              onClick={isDisabled}
+              // onClick={isDisabled}
             >
               <HistoryNavSVG />
-              History
+              <span>History</span>
             </NavLink>
           </button>
         </div>
