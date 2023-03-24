@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ReactComponent as Fuel } from "../../assets/icons/fuel.svg";
 import { ReactComponent as Distance } from "../../assets/icons/distance.svg";
 import { ReactComponent as Consumption } from "../../assets/icons/consumption.svg";
