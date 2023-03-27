@@ -9,11 +9,11 @@ import { ReactComponent as PriceNavSVG } from "../../assets/icons/price-nav.svg"
 import { ReactComponent as HistoryNavSVG } from "../../assets/icons/history-nav.svg";
 
 interface IHeader {
-  allData: Array<{ fuel: number; distance: number; consumption: string }>;
+  appDataState: Array<{ fuel: number; distance: number; consumption: string }>;
   // isDisabled: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-const Header: React.FC<IHeader> = ({ allData }) => {
+const Header: React.FC<IHeader> = ({ appDataState }) => {
   return (
     <header>
       <div className="header-wrapper">
@@ -38,7 +38,7 @@ const Header: React.FC<IHeader> = ({ allData }) => {
           </button>
           <button tabIndex={-1}>
             <NavLink
-              // className={!allData.length ? "disabled" : ""}
+              // className={!appDataState.length ? "disabled" : ""}
               to="/history"
               // onClick={isDisabled}
             >

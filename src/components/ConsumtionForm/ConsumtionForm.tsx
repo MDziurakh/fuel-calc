@@ -1,19 +1,19 @@
 import React, { Dispatch } from "react";
-import { INewState } from "../../App";
-// стилізувати 
+import { IFuelFormState } from "../../App";
+
 interface IConsumption {
-  inputsData: INewState;
-  setNewState: Dispatch<React.SetStateAction<INewState>>;
+  fuelFormInputsData: IFuelFormState;
+  setFuelFormState: Dispatch<React.SetStateAction<IFuelFormState>>;
   onSubmitHandler: (e: React.ChangeEvent<HTMLFormElement>) => void;
 }
 
 const ConsumtionForm: React.FC<IConsumption> = (props: IConsumption) => {
-  const { inputsData, onSubmitHandler, setNewState} = props;
+  const { fuelFormInputsData, onSubmitHandler, setFuelFormState} = props;
 
-  const { fuel, distance, price } = inputsData;
+  const { fuel, distance, price } = fuelFormInputsData;
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewState({ ...inputsData, [e.target.name]: e.target.value });
+    setFuelFormState({ ...fuelFormInputsData, [e.target.name]: e.target.value });
   };
 
   return (

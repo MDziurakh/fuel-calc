@@ -5,62 +5,60 @@ import HistoryPage from "./pages/HistoryPage";
 import PriceCalcPage from "./pages/PriceCalcPage";
 import Header from "./components/Header/Header";
 
-import { v4 as uuidv4 } from "uuid";
-
 const App: React.FC = () => {
-  // const [consumption, setConsumption] = useState<string>("");
   const [consumption, setConsumption] = useState<IConsumption>({
     fuelConsumption: 0,
     priceResult: 0,
   });
-  const [copyMessage, setCopyMessage] = useState<boolean>(false);
-  const [allData, setAllData] = useState<
-    Array<{ fuel: number; distance: number; consumption: string; id: string }>
-  >([]);
-  const [newState, setNewState] = useState<INewState>({
+  const [showCopyMessage, setShowCopyMessage] = useState<boolean>(false);
+  const [appDataState, setAppDataState] = useState<Array<IAllDataItem>>([]);
+  
+  const [fuelFormState, setFuelFormState] = useState<IFuelFormState>({
     fuel: 0,
     price: 0,
     distance: 0,
   });
 
-  const [priceCalculateInput, setPriceCalculateInput] = useState<
-    number | string
-  >("");
+  const [priceFormState, setPiceFormState] = useState<IPriceFormState>({
+    distance: "",
+    price: 0,
+  });
   const [priceConsumption, setPriceConsumption] = useState<string>("");
 
-  const [priceFormInput, setPriceFormInput] = useState<number>(0);
 
   useEffect(() => {
-    const dataFromStorage = localStorage.getItem("allData");
-
+    const dataFromStorage = localStorage.getItem("appDataState");
     if (typeof dataFromStorage === "string") {
-      setAllData(JSON.parse(dataFromStorage));
+      setAppDataState(JSON.parse(dataFromStorage));
     }
   }, []);
 
   useEffect(() => {
-    console.log(allData);
-    if (allData.length) {
-      console.log(allData);
-
-      localStorage.setItem("allData", JSON.stringify(allData));
+    if (appDataState.length) {
+      localStorage.setItem("appDataState", JSON.stringify(appDataState));
     } else {
-      localStorage.removeItem("allData");
+      localStorage.removeItem("appDataState");
       setConsumption({ fuelConsumption: 0, priceResult: 0 });
     }
-  }, [allData]);
+  }, [appDataState]);
 
   const onSubmitHandler = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (!newState.fuel || !newState.distance || !newState.price) {
+    if (
+      !fuelFormState.fuel ||
+      !fuelFormState.distance ||
+      !fuelFormState.price
+    ) {
       return;
     }
-    let litrage = ((newState.fuel / newState.distance) * 100).toFixed(2);
+    let litrage = ((fuelFormState.fuel / fuelFormState.distance) * 100).toFixed(
+      2
+    );
     let price = (
-      (newState.fuel / newState.distance) *
+      (fuelFormState.fuel / fuelFormState.distance) *
       100 *
-      newState.price *
-      (newState.distance / 100)
+      fuelFormState.price *
+      (fuelFormState.distance / 100)
     ).toFixed(2);
     let res: IConsumption = { fuelConsumption: +litrage, priceResult: +price };
 
@@ -70,47 +68,48 @@ const App: React.FC = () => {
       consumption: string;
       id: string;
     } = {
-      fuel: newState.fuel,
-      distance: newState.distance,
-      consumption: ((newState.fuel / newState.distance) * 100)
+      fuel: fuelFormState.fuel,
+      distance: fuelFormState.distance,
+      consumption: ((fuelFormState.fuel / fuelFormState.distance) * 100)
         .toFixed(2)
         .toString(),
-      id: uuidv4(),
+      id: crypto.randomUUID(),
     };
 
     setConsumption(res);
-    setAllData([...allData, newData]);
-    setNewState({ fuel: 0, distance: 0, price: 0 });
+    setAppDataState([...appDataState, newData]);
+    setFuelFormState({ fuel: 0, distance: 0, price: 0 });
   };
 
   const onClickCopy = (): void => {
     if (consumption.fuelConsumption !== 0) {
       navigator.clipboard.writeText(
-        `fuel consumption is ${consumption.fuelConsumption.toString()}`
+        `Consumption - ${consumption.fuelConsumption.toString()}L/100km, distance - ${
+          appDataState[appDataState.length - 1].distance
+        }km ,price - ${consumption.priceResult}UAH`
       );
-      setCopyMessage(true);
+      setShowCopyMessage(true);
       setTimeout(() => {
-        setCopyMessage(false);
+        setShowCopyMessage(false);
       }, 1300);
     } else {
     }
   };
 
   const onRemoveCalculateItem = (id: string): void => {
-    const filteredData = allData.filter((dataItem) => dataItem.id !== id);
+    const filteredData = appDataState.filter((dataItem) => dataItem.id !== id);
     if (!filteredData.length) {
-      console.log(filteredData.length);
-      setAllData([]);
+      setAppDataState([]);
       return;
     }
-    setAllData(filteredData);
+    setAppDataState(filteredData);
   };
 
   const clearStorageData = (): void => {
     const clearData = window.confirm("Remove all data from storage?");
     if (clearData) {
-      localStorage.removeItem("allData");
-      setAllData([]);
+      localStorage.removeItem("appDataState");
+      setAppDataState([]);
       setConsumption({ fuelConsumption: 0, priceResult: 0 });
     }
   };
@@ -121,39 +120,36 @@ const App: React.FC = () => {
   ): void => {
     e.preventDefault();
 
-    if (manualConsumptionInput && priceCalculateInput) {
+    if (manualConsumptionInput && priceFormState.distance) {
       setPriceConsumption(
         `It will be cost ${(
           manualConsumptionInput *
           0.01 *
-          +priceCalculateInput *
-          priceFormInput
+          +priceFormState.distance *
+          priceFormState.price
         ).toFixed(1)} UAH`
       );
     } else if (
-      priceCalculateInput &&
-      allData.length &&
-      allData[allData.length - 1].consumption
+      priceFormState.distance &&
+      appDataState.length &&
+      appDataState[appDataState.length - 1].consumption
     ) {
-      const latsConsumption = +allData[allData.length - 1].consumption;
+      const lastConsumption =
+        +appDataState[appDataState.length - 1].consumption;
       setPriceConsumption(
         `It will be cost ${(
-          latsConsumption *
+          lastConsumption *
           0.01 *
-          +priceCalculateInput *
-          priceFormInput
+          +priceFormState.distance *
+          priceFormState.price
         ).toFixed(1)} UAH`
       );
     }
   };
 
-  // const isDisabled = (e: React.MouseEvent<HTMLElement>): void => {
-  //   !allData.length && e.preventDefault();
-  // };
-
   return (
     <div>
-      <Header allData={allData} />
+      <Header appDataState={appDataState} />
       <div className="content-wrapper">
         <div className="content">
           <Routes>
@@ -162,13 +158,13 @@ const App: React.FC = () => {
               element={
                 <MainPage
                   clearStorageData={clearStorageData}
-                  allData={allData}
+                  appDataState={appDataState}
                   onSubmitHandler={onSubmitHandler}
-                  setNewState={setNewState}
-                  inputsData={newState}
+                  setFuelFormState={setFuelFormState}
+                  fuelFormInputsData={fuelFormState}
                   consumption={consumption}
                   onClickCopy={onClickCopy}
-                  copyMessage={copyMessage}
+                  showCopyMessage={showCopyMessage}
                 />
               }
             />
@@ -176,13 +172,12 @@ const App: React.FC = () => {
               path="/price-calc"
               element={
                 <PriceCalcPage
-                  allData={allData}
+                  appDataState={appDataState}
                   onPriceCalculate={onPriceCalculate}
-                  priceCalculateInput={priceCalculateInput}
                   priceConsumption={priceConsumption}
-                  priceFormInput={priceFormInput}
-                  setPriceFormInput={setPriceFormInput}
-                  setPriceCalculateInput={setPriceCalculateInput}
+                  priceFormState={priceFormState}
+                  setPiceFormState={setPiceFormState}
+                  priceFormInputsData={priceFormState}
                 />
               }
             />
@@ -190,8 +185,8 @@ const App: React.FC = () => {
               path="/history"
               element={
                 <HistoryPage
-                clearStorageData={clearStorageData}
-                  allData={allData}
+                  clearStorageData={clearStorageData}
+                  appDataState={appDataState}
                   onRemoveCalculateItem={onRemoveCalculateItem}
                 />
               }
@@ -205,7 +200,7 @@ const App: React.FC = () => {
 
 export default App;
 
-export interface INewState {
+export interface IFuelFormState {
   fuel: number;
   price: number;
   distance: number;
@@ -216,9 +211,15 @@ export interface IConsumption {
   fuelConsumption: number;
 }
 
-export interface IAllData {
+export interface IAllDataItem {
   fuel: number;
   distance: number;
   consumption: string;
   id: string;
+}
+
+export interface IPriceFormState {
+  distance: number | string;
+  // consumption: string;
+  price: number;
 }

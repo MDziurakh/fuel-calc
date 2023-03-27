@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { IPriceFormState } from "../../App";
 
 interface IPriceForm {
-  priceCalculateInput: number | string;
-  setPriceCalculateInput: React.Dispatch<React.SetStateAction<number | string>>;
   onPriceCalculate: (
     e: React.ChangeEvent<HTMLFormElement>,
     manualInput: number
   ) => void;
   priceConsumption: string;
   lastConsumption: number | string;
-  priceFormInput: number;
-  setPriceFormInput: React.Dispatch<React.SetStateAction<number>>;
+
+  setPriceFormState: React.Dispatch<React.SetStateAction<IPriceFormState>>;
+  priceFormInputsData: IPriceFormState;
+  priceFormState:IPriceFormState
+  
+  
 }
 
 const PriceForm: React.FC<IPriceForm> = ({
-  setPriceCalculateInput,
   onPriceCalculate,
-  priceCalculateInput,
   lastConsumption,
-  priceFormInput,
-  setPriceFormInput,
+  setPriceFormState, 
+  priceFormInputsData
 }) => {
+  
   const [consumptionInput, setConsumptionInput] = useState<number | string>(
     lastConsumption
   );
+
+  const {distance, price} = priceFormInputsData;
 
   useEffect(() => {
     if (lastConsumption) {
@@ -32,19 +36,22 @@ const PriceForm: React.FC<IPriceForm> = ({
   }, [lastConsumption]);
 
   const isSomeFilled: boolean =
-    !!priceCalculateInput || !!priceFormInput || !!consumptionInput;
+    !!distance || !!price || !!consumptionInput;
 
   const onClickClear = (): void => {
     setConsumptionInput("");
-    setPriceFormInput(0);
-    setPriceCalculateInput(0);
+    setPriceFormState({ distance:'', price:0})
   };
 
-  const onPriceCalculateClick = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const onPriceCalculateHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     onPriceCalculate(e, +consumptionInput);
     onClickClear();
   };
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    setPriceFormState({...priceFormInputsData, [e.target.name]:e.target.value})
+  }
 
   return (
     <>
@@ -55,7 +62,7 @@ const PriceForm: React.FC<IPriceForm> = ({
       >
         Clear form
       </button>
-      <form className="price-form" onSubmit={onPriceCalculateClick}>
+      <form className="price-form" onSubmit={onPriceCalculateHandler}>
         <h2>Enter your data</h2>
         <div className="input-block">
           <label htmlFor="distanceCalc">Distance in km:</label>
@@ -63,19 +70,19 @@ const PriceForm: React.FC<IPriceForm> = ({
             id="distanceCalc"
             required
             type="number"
-            name="distanceCalc"
+            name="distance"
             placeholder="Distance..."
-            onChange={(e) => setPriceCalculateInput(+e.target.value)}
-            value={priceCalculateInput ? priceCalculateInput.toString() : ""}
+            onChange={handleInput}
+            value={distance ? distance.toString() : ""}
           />
         </div>
         <div className="input-block">
-          <label htmlFor="consumption">Consumption in litres:</label>
+          <label htmlFor="consumptionCalc">Consumption in litres:</label>
           <input
-            id="consumption"
+            id="consumptionCalc"
             required
             type="number"
-            name="consumption"
+            name="fuel"
             placeholder="Consumption..."
             value={consumptionInput ? consumptionInput.toString() : ""}
             onChange={(e) => setConsumptionInput(+e.target.value)}
@@ -91,10 +98,8 @@ const PriceForm: React.FC<IPriceForm> = ({
             type="number"
             placeholder="Price..."
             step={0.01}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPriceFormInput(+e.target.value)
-            }
-            value={priceFormInput ? priceFormInput.toString() : ""}
+            onChange={handleInput}
+            value={price ? price.toString() : ""}
             min={0.01}
           />
         </div>

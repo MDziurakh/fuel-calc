@@ -1,6 +1,6 @@
 {
   "name": "fuel-calc",
-  "homepage": "https://mdziurakh.github.io/fuel-calc",
+  "//": "homepagehttps://mdziurakh.github.io/fuel-calc",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -49,6 +49,7 @@
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
     "@types/uuid": "^9.0.1",
+    "gh-pages": "^5.0.0",
     "sass": "^1.59.3"
   }
 }

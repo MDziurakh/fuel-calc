@@ -1,4 +1,5 @@
 import React from 'react';
+import { IAllDataItem } from '../App';
 import CalculationsList from '../components/CalculationsList/CalculationsList';
 
 import './HistoryPage.scss'
@@ -6,16 +7,16 @@ import './HistoryPage.scss'
 interface IHistoryPage {
     clearStorageData:()=>void;
     onRemoveCalculateItem:(id:string)=>void
-    allData: Array<{ fuel: number; distance: number; consumption: string, id:string }>
+    appDataState: Array<IAllDataItem>
 }
 
-const HistoryPage:React.FC<IHistoryPage> = ({allData, onRemoveCalculateItem, clearStorageData}) => {
+const HistoryPage:React.FC<IHistoryPage> = ({appDataState, onRemoveCalculateItem, clearStorageData}) => {
 
 
     return (
         <div className='history-page-wrapper wrapper'>
-            <h1>Your calculations list{!allData.length && ' is empty!'}</h1> 
-           <CalculationsList allData={allData} onRemoveCalculateItem={onRemoveCalculateItem} clearStorageData={clearStorageData} /> 
+            <h1>Your calculations list{!appDataState.length && ' is empty!'}</h1> 
+           <CalculationsList appDataState={appDataState} onRemoveCalculateItem={onRemoveCalculateItem} clearStorageData={clearStorageData} /> 
         </div>
     );
 };

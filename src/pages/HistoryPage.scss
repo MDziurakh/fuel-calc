@@ -39,8 +39,9 @@
             position: absolute;
             top: 5px;
             right: 10px;
-
+            
             svg {
+                cursor: pointer;
                 display: block;
                 width: 30px;
                 height: 30px;
@@ -53,14 +54,11 @@
                     transform: scale(0.9);
                     
                     path {
-                        stroke: rgb(218 141 141);
+                        stroke: rgb(243, 24, 24);
                     }
                 }
                 &:active {
                     transform: scale(0.8);
-                    path {
-                        stroke: darken($color: rgb(218 141 141), $amount: 10);
-                    }
                 }
 
             }

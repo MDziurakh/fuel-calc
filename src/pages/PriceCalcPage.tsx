@@ -1,32 +1,36 @@
 import React from "react";
+import { IAllDataItem, IPriceFormState } from "../App";
 import PriceForm from "../components/PriceForm/PriceForm";
 
 import "./PriceCalcPage.scss";
 
 interface IPriceCalcPage {
   priceConsumption: string;
-  allData: Array<{ fuel: number; distance: number; consumption: string }>;
+  appDataState: Array<IAllDataItem>;
   onPriceCalculate: (
     e: React.ChangeEvent<HTMLFormElement>,
     manualConsumptionInput: number
   ) => void;
-  priceCalculateInput: number | string;
-  priceFormInput: number;
-  setPriceFormInput: React.Dispatch<React.SetStateAction<number>>;
-  setPriceCalculateInput: React.Dispatch<React.SetStateAction<number | string>>;
+  
+
+  priceFormState:IPriceFormState;
+  setPiceFormState: React.Dispatch<React.SetStateAction<IPriceFormState>>
+  priceFormInputsData : IPriceFormState;
 }
 
 const PriceCalcPage: React.FC<IPriceCalcPage> = ({
-  allData,
+  appDataState,
   onPriceCalculate,
-  priceCalculateInput,
+  
+
   priceConsumption,
-  priceFormInput,
-  setPriceFormInput,
-  setPriceCalculateInput,
+  
+  priceFormState, 
+  setPiceFormState,
+  priceFormInputsData
 }) => {
   let lastConsumptionCheck =
-    allData.length > 0 ? +allData[allData.length - 1].consumption : "";
+    appDataState.length > 0 ? +appDataState[appDataState.length - 1].consumption : "";
 
   return (
     <div className="price-page-wrapper wrapper">
@@ -34,12 +38,13 @@ const PriceCalcPage: React.FC<IPriceCalcPage> = ({
       <div className="price-form-block form-block">
         <PriceForm
           onPriceCalculate={onPriceCalculate}
-          priceCalculateInput={priceCalculateInput}
-          setPriceCalculateInput={setPriceCalculateInput}
           priceConsumption={priceConsumption}
           lastConsumption={lastConsumptionCheck}
-          priceFormInput={priceFormInput}
-          setPriceFormInput={setPriceFormInput}
+          
+          priceFormState={priceFormState}
+          setPriceFormState={setPiceFormState}
+          priceFormInputsData={priceFormInputsData}
+
         />
         <div className="price-calc-consumption">
           <h4>
