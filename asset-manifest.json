@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/fuel-calc/static/css/main.94be5dba.css",
-    "main.js": "/fuel-calc/static/js/main.e71848fa.js",
+    "main.css": "/fuel-calc/static/css/main.fb37937c.css",
+    "main.js": "/fuel-calc/static/js/main.67e95e77.js",
     "static/media/logo.svg": "/fuel-calc/static/media/logo.a9bc239f8f1f6daedc5e573d876bedae.svg",
     "static/media/history-nav.svg": "/fuel-calc/static/media/history-nav.c2b6adbf064146f605f4789340a62f51.svg",
     "static/media/price-nav.svg": "/fuel-calc/static/media/price-nav.a9bfe0871cc2e242d9cad0c093b70201.svg",
@@ -17,11 +17,11 @@
     "static/media/upside.svg": "/fuel-calc/static/media/upside.951dfafac1020bfecca67c886c61bcc1.svg",
     "index.html": "/fuel-calc/index.html",
     "static/media/close.svg": "/fuel-calc/static/media/close.59d0d00e7bb095570c7bd646b184f4ed.svg",
-    "main.94be5dba.css.map": "/fuel-calc/static/css/main.94be5dba.css.map",
-    "main.e71848fa.js.map": "/fuel-calc/static/js/main.e71848fa.js.map"
+    "main.fb37937c.css.map": "/fuel-calc/static/css/main.fb37937c.css.map",
+    "main.67e95e77.js.map": "/fuel-calc/static/js/main.67e95e77.js.map"
   },
   "entrypoints": [
-    "static/css/main.94be5dba.css",
-    "static/js/main.e71848fa.js"
+    "static/css/main.fb37937c.css",
+    "static/js/main.67e95e77.js"
   ]
 }
