@@ -31,8 +31,11 @@ const CalculationsList: React.FC<ICalculationsList> = ({
     { nameOfSVGComponent: <Upside /> },
     { nameOfSVGComponent: <Zany /> },
   ];
-  
-  const randomNumber = useMemo(()=>Math.floor(Math.random() * svgArray.length), [])
+
+  const randomNumber = useMemo(
+    () => Math.floor(Math.random() * svgArray.length),
+    [svgArray.length]
+  );
 
   return (
     <>

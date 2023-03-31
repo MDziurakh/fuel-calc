@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import HistoryPage from "./pages/HistoryPage";
 import PriceCalcPage from "./pages/PriceCalcPage";
 import Header from "./components/Header/Header";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { API } from "./firebaseConfig/API";
 
 const App: React.FC = () => {
   const [consumption, setConsumption] = useState<IConsumption>({
@@ -12,19 +15,33 @@ const App: React.FC = () => {
   });
   const [showCopyMessage, setShowCopyMessage] = useState<boolean>(false);
   const [appDataState, setAppDataState] = useState<Array<IAllDataItem>>([]);
-  
+  const [appDataStateFirebase, setAppDataStateFirebase] = useState<Array<IAllDataItem>>([]);
+
   const [fuelFormState, setFuelFormState] = useState<IFuelFormState>({
     fuel: 0,
     price: 0,
     distance: 0,
   });
-
   const [priceFormState, setPiceFormState] = useState<IPriceFormState>({
     distance: "",
     price: 0,
   });
   const [priceConsumption, setPriceConsumption] = useState<string>("");
 
+
+
+  const [user, setUser] = useState<any>(null);
+  const auth = getAuth();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const dataFromStorage = localStorage.getItem("appDataState");
@@ -33,6 +50,24 @@ const App: React.FC = () => {
     }
   }, []);
 
+  useEffect(()=>{
+  if (user){
+    // дані підтягує, зберігає в стейт, але поки є два різних стейти. 
+    // варіант - забути повністю про локал сторедж, все на фаєрбейс
+    
+    const f = async() =>{
+      await API.getUserHistory(user.uid).then((result)=>{
+        if(!result){
+          return
+        }
+        setAppDataStateFirebase(result.history)
+        
+      })
+    }
+    f()
+  }
+  },[user])
+  
   useEffect(() => {
     if (appDataState.length) {
       localStorage.setItem("appDataState", JSON.stringify(appDataState));
@@ -79,6 +114,11 @@ const App: React.FC = () => {
     setConsumption(res);
     setAppDataState([...appDataState, newData]);
     setFuelFormState({ fuel: 0, distance: 0, price: 0 });
+    
+    API.updateUserHistory(user.uid, newData);
+    setAppDataStateFirebase([...appDataStateFirebase, newData])
+    
+    // setAppDataState([...appDataStateFirebase, newData])
   };
 
   const onClickCopy = (): void => {
@@ -149,6 +189,12 @@ const App: React.FC = () => {
 
   return (
     <div>
+      {auth.currentUser ? (
+        <h1>{auth.currentUser.displayName}</h1>
+      ) : (
+        <h1>not logged</h1>
+      )}
+      <h1><NavLink to='/'>To home</NavLink></h1>
       <Header appDataState={appDataState} />
       <div className="content-wrapper">
         <div className="content">
@@ -191,6 +237,7 @@ const App: React.FC = () => {
                 />
               }
             />
+            <Route path="/login-page" element={<LoginPage />}></Route>
           </Routes>
         </div>
       </div>

@@ -18,7 +18,7 @@ const Header: React.FC<IHeader> = ({ appDataState }) => {
     <header>
       <div className="header-wrapper">
         <div className="logo">
-          <NavLink to="/">
+          <NavLink to="/login-page">
             <Logo />
             <span className="logo-text">Fuel Calculator</span>
           </NavLink>
