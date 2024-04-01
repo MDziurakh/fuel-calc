@@ -8,6 +8,7 @@ header {
     width: 100%;
     background-color: darken($color: $contentColor, $amount: 15);
     border-radius: 0;
+
     .header-wrapper {
         max-width: 1080px;
         margin: 0 auto;
@@ -37,7 +38,6 @@ header {
                 }
 
                 .logo-text {
-                    font-family: sans-serif;
                     font-weight: 900;
                     font-size: 17px;
                     text-align: start;
@@ -52,9 +52,9 @@ header {
             display: flex;
             justify-content: space-evenly;
             width: 100%;
-            
-            
-            
+
+
+
             button {
                 width: 30%;
                 cursor: auto;
@@ -127,6 +127,7 @@ header {
                 }
 
             }
+
             @media(max-width:768.9px) {
                 position: fixed;
                 left: 0;
@@ -137,15 +138,11 @@ header {
                 max-width: 940px;
                 padding: 10px 0;
                 border-radius: 0;
-                // display: grid;
-                // grid-template-columns: 1fr 1fr 1fr;
 
                 button {
                     width: 30%;
-                    a{
-                    }
                 }
-                
+
             }
         }
     }

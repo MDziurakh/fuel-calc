@@ -1,6 +1,7 @@
-import React, { Dispatch } from "react";
+import React, { Dispatch, useEffect } from "react";
 import { IConsumption, IFuelFormState } from "../App";
 import ConsumtionForm from "../components/ConsumtionForm/ConsumtionForm";
+import ReactGA from "react-ga4";
 
 import "./MainPage.scss";
 
@@ -30,13 +31,21 @@ const MainPage: React.FC<IMainPage> = (props) => {
   } = props;
 
   // console.log(appDataState);
-  
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: "/my-path",
+      title: "Custom Title",
+    });
+  }, []);
 
   return (
     <div className="main-page-wrapper wrapper">
       <h1>
         {appDataState.length
-          ? `Last consumption was ${appDataState[appDataState.length - 1].consumption} L`
+          ? `Last consumption was ${
+              appDataState[appDataState.length - 1].consumption
+            } L`
           : "Calculate your fuel consumption"}
       </h1>
       <div className="main-form-block form-block">
@@ -58,10 +67,10 @@ const MainPage: React.FC<IMainPage> = (props) => {
               "Here will be displayed your consumption"
             ) : (
               <>
-                {`Consumption - ${consumption.fuelConsumption} L/100km, distance - 
-                ${
-                  appDataState[appDataState.length - 1].distance
-                }km, 
+                {`Consumption - ${
+                  consumption.fuelConsumption
+                } L/100km, distance - 
+                ${appDataState[appDataState.length - 1].distance}km, 
                 price - ${consumption.priceResult} UAH`}
                 <button
                   className="svg-btn"
@@ -69,7 +78,9 @@ const MainPage: React.FC<IMainPage> = (props) => {
                   disabled={!consumption.fuelConsumption}
                 >
                   <Copy height={30} />
-                  <span className={showCopyMessage ? "visible" : ''}>Copied!</span>
+                  <span className={showCopyMessage ? "visible" : ""}>
+                    Copied!
+                  </span>
                 </button>
               </>
             )}
