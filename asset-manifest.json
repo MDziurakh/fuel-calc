@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/fuel-calc/static/css/main.fb37937c.css",
-    "main.js": "/fuel-calc/static/js/main.67e95e77.js",
-    "static/media/logo.svg": "/fuel-calc/static/media/logo.a9bc239f8f1f6daedc5e573d876bedae.svg",
-    "static/media/history-nav.svg": "/fuel-calc/static/media/history-nav.c2b6adbf064146f605f4789340a62f51.svg",
-    "static/media/price-nav.svg": "/fuel-calc/static/media/price-nav.a9bfe0871cc2e242d9cad0c093b70201.svg",
-    "static/media/melting.svg": "/fuel-calc/static/media/melting.d183050941d6ab9d028d3d2d8190ff4b.svg",
-    "static/media/zany.svg": "/fuel-calc/static/media/zany.ff998f65edb21167c092662e0066f33d.svg",
-    "static/media/fuel.svg": "/fuel-calc/static/media/fuel.ad87cd4be77a22ce615d99da1a8a30f1.svg",
-    "static/media/distance.svg": "/fuel-calc/static/media/distance.2609a8feda74329ef75d764be141f510.svg",
-    "static/media/consumption.svg": "/fuel-calc/static/media/consumption.86a3b421a9bf815451665f845c131ac5.svg",
-    "static/media/fuel-nav.svg": "/fuel-calc/static/media/fuel-nav.860af4bb5804e30dc323d13627d862cb.svg",
-    "static/media/raise.svg": "/fuel-calc/static/media/raise.db512cf00abd1654a64eeba8507739db.svg",
-    "static/media/rolling.svg": "/fuel-calc/static/media/rolling.d1ca790cef6a4c86120d7405a54272d4.svg",
-    "static/media/copy.svg": "/fuel-calc/static/media/copy.ba9f9dd2e63c11b9677485838c3f5be4.svg",
-    "static/media/upside.svg": "/fuel-calc/static/media/upside.951dfafac1020bfecca67c886c61bcc1.svg",
-    "index.html": "/fuel-calc/index.html",
-    "static/media/close.svg": "/fuel-calc/static/media/close.59d0d00e7bb095570c7bd646b184f4ed.svg",
-    "main.fb37937c.css.map": "/fuel-calc/static/css/main.fb37937c.css.map",
-    "main.67e95e77.js.map": "/fuel-calc/static/js/main.67e95e77.js.map"
+    "main.css": "/static/css/main.fb37937c.css",
+    "main.js": "/static/js/main.2238e79c.js",
+    "static/media/logo.svg": "/static/media/logo.a9bc239f8f1f6daedc5e573d876bedae.svg",
+    "static/media/history-nav.svg": "/static/media/history-nav.c2b6adbf064146f605f4789340a62f51.svg",
+    "static/media/price-nav.svg": "/static/media/price-nav.a9bfe0871cc2e242d9cad0c093b70201.svg",
+    "static/media/melting.svg": "/static/media/melting.d183050941d6ab9d028d3d2d8190ff4b.svg",
+    "static/media/zany.svg": "/static/media/zany.ff998f65edb21167c092662e0066f33d.svg",
+    "static/media/fuel.svg": "/static/media/fuel.ad87cd4be77a22ce615d99da1a8a30f1.svg",
+    "static/media/distance.svg": "/static/media/distance.2609a8feda74329ef75d764be141f510.svg",
+    "static/media/consumption.svg": "/static/media/consumption.86a3b421a9bf815451665f845c131ac5.svg",
+    "static/media/fuel-nav.svg": "/static/media/fuel-nav.860af4bb5804e30dc323d13627d862cb.svg",
+    "static/media/raise.svg": "/static/media/raise.db512cf00abd1654a64eeba8507739db.svg",
+    "static/media/rolling.svg": "/static/media/rolling.d1ca790cef6a4c86120d7405a54272d4.svg",
+    "static/media/copy.svg": "/static/media/copy.ba9f9dd2e63c11b9677485838c3f5be4.svg",
+    "static/media/upside.svg": "/static/media/upside.951dfafac1020bfecca67c886c61bcc1.svg",
+    "static/media/close.svg": "/static/media/close.59d0d00e7bb095570c7bd646b184f4ed.svg",
+    "index.html": "/index.html",
+    "main.fb37937c.css.map": "/static/css/main.fb37937c.css.map",
+    "main.2238e79c.js.map": "/static/js/main.2238e79c.js.map"
   },
   "entrypoints": [
     "static/css/main.fb37937c.css",
-    "static/js/main.67e95e77.js"
+    "static/js/main.2238e79c.js"
   ]
 }
