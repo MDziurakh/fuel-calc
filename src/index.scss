@@ -2,20 +2,21 @@
 
 * {
   box-sizing: border-box;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: monospace;
   color: darken($color: $color4, $amount: 30);
   border-radius: 10px;
 }
 
 body {
   background-color: $color1;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 
-html{
+html {
   overflow-y: scroll;
 }
+
 // min-height: 80vh;
 
 h1,
@@ -28,94 +29,107 @@ h6 {
   text-align: center;
 }
 
-h1{
+h1 {
   font-size: 34px;
 }
-h2{
+
+h2 {
   font-size: 28px;
 }
-h4{
+
+h4 {
   font-size: 20px;
   max-width: 350px;
 }
 
-label{
+label {
   font-size: 20px;
   cursor: pointer;
 }
-button{
+
+button {
   font-size: 14px;
 }
 
-@media (max-width:668.9px){
+@media (max-width:668.9px) {
 
-  h1{
+  h1 {
     max-width: 300px;
     font-size: 30px;
   }
-  h2{
+
+  h2 {
     font-size: 24px;
   }
 
-  
-  
-  label{
+
+
+  label {
     font-size: 18px;
   }
-  button{
+
+  button {
     font-size: 14px;
-  } 
+  }
 }
-@media (max-width:568.9px){
-  h1{
+
+@media (max-width:568.9px) {
+  h1 {
     font-size: 28px;
     max-width: 280px;
     padding-bottom: 20px !important;
   }
-  h2{
+
+  h2 {
     font-size: 20px;
   }
-  h4{
+
+  h4 {
     font-size: 18px;
-    @media (max-width:468.9px){
+
+    @media (max-width:468.9px) {
       font-size: 14px;
       max-width: 270px;
-      
+
     }
   }
-  
-  label{
+
+  label {
     font-size: 14px;
   }
 }
 
-button>a>span{
+button>a>span {
   font-size: 18px;
-  @media (max-width:468.9px){
+
+  @media (max-width:468.9px) {
     font-size: 13px;
 
   }
 }
 
-input{
+input {
   font-size: 18px;
-  @media (max-width:668.9px){
+
+  @media (max-width:668.9px) {
     font-size: 16px;
 
   }
 }
 
-.content-wrapper{
+.content-wrapper {
 
   padding: 20px 40px;
-  
-  @media(max-width:768.9px){
+
+  @media(max-width:768.9px) {
     padding: 20px 40px 100px;
   }
-  @media(max-width:500.9px){
+
+  @media(max-width:500.9px) {
     padding: 20px 20px 100px;
   }
 }
+
 .content {
   max-width: 940px;
   min-height: 66vh;
@@ -131,7 +145,8 @@ input{
     border: none;
     font-weight: 600;
     font-size: 18px;
-    @media(max-width:568.9px){
+
+    @media(max-width:568.9px) {
       font-size: 14px;
     }
   }
@@ -149,9 +164,10 @@ input{
 }
 
 
-div.form-block{
+div.form-block {
   max-width: 450px;
 }
+
 form {
   padding: 40px 10px;
   display: flex;

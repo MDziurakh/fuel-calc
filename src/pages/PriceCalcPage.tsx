@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IAllDataItem, IPriceFormState } from "../App";
 import PriceForm from "../components/PriceForm/PriceForm";
 
 import "./PriceCalcPage.scss";
+import ReactGA from "react-ga4";
+import { useLocation } from "react-router";
 
 interface IPriceCalcPage {
   priceConsumption: string;
@@ -11,26 +13,36 @@ interface IPriceCalcPage {
     e: React.ChangeEvent<HTMLFormElement>,
     manualConsumptionInput: number
   ) => void;
-  
 
-  priceFormState:IPriceFormState;
-  setPiceFormState: React.Dispatch<React.SetStateAction<IPriceFormState>>
-  priceFormInputsData : IPriceFormState;
+  priceFormState: IPriceFormState;
+  setPiceFormState: React.Dispatch<React.SetStateAction<IPriceFormState>>;
+  priceFormInputsData: IPriceFormState;
 }
 
 const PriceCalcPage: React.FC<IPriceCalcPage> = ({
   appDataState,
   onPriceCalculate,
-  
-
   priceConsumption,
-  
-  priceFormState, 
+  priceFormState,
   setPiceFormState,
-  priceFormInputsData
+  priceFormInputsData,
 }) => {
-  let lastConsumptionCheck =
-    appDataState.length > 0 ? +appDataState[appDataState.length - 1].consumption : "";
+  const { pathname } = useLocation();
+
+  const lastConsumptionCheck =
+    appDataState.length > 0
+      ? +appDataState[appDataState.length - 1].consumption
+      : "";
+
+  console.log(pathname);
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: pathname,
+      title: "Custom Title",
+    });
+  }, [pathname]);
 
   return (
     <div className="price-page-wrapper wrapper">
@@ -40,16 +52,14 @@ const PriceCalcPage: React.FC<IPriceCalcPage> = ({
           onPriceCalculate={onPriceCalculate}
           priceConsumption={priceConsumption}
           lastConsumption={lastConsumptionCheck}
-          
           priceFormState={priceFormState}
           setPriceFormState={setPiceFormState}
           priceFormInputsData={priceFormInputsData}
-
         />
         <div className="price-calc-consumption">
           <h4>
             {priceConsumption.length
-              ? priceConsumption 
+              ? priceConsumption
               : "Here will be displayed your price"}
           </h4>
         </div>
