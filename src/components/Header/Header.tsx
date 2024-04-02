@@ -13,26 +13,26 @@ const Header: React.FC = () => {
     <header>
       <div className="header-wrapper">
         <div className="logo">
-          <NavLink to="/consumption">
+          <NavLink to="fuel-calc/consumption">
             <Logo />
             <span className="logo-text">Fuel Calculator v1.1</span>
           </NavLink>
         </div>
         <div className="nav-list">
           <button tabIndex={-1}>
-            <NavLink to="/">
+            <NavLink to="fuel-calc/consumption">
               <FuelNavSVG />
               <span>Fuel form</span>
             </NavLink>
           </button>
           <button tabIndex={-1}>
-            <NavLink to="/price">
+            <NavLink to="fuel-calc/price">
               <PriceNavSVG />
               <span>Price form</span>
             </NavLink>
           </button>
           <button tabIndex={-1}>
-            <NavLink to="/history">
+            <NavLink to="fuel-calc/history">
               <HistoryNavSVG />
               <span>History</span>
             </NavLink>

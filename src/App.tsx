@@ -6,6 +6,10 @@ import PriceCalcPage from "./pages/PriceCalcPage";
 import Header from "./components/Header/Header";
 import ReactGA from "react-ga4";
 
+const gaTrackingId = "G-CRCE9WGQKQ";
+
+ReactGA.initialize(gaTrackingId);
+
 const App: React.FC = () => {
   const [consumption, setConsumption] = useState<IConsumption>({
     fuelConsumption: 0,
@@ -187,7 +191,7 @@ const App: React.FC = () => {
         <div className="content">
           <Routes>
             <Route
-              path="/consumption"
+              path="fuel-calc/consumption"
               element={
                 <MainPage
                   clearStorageData={clearStorageData}
@@ -202,7 +206,7 @@ const App: React.FC = () => {
               }
             />
             <Route
-              path="/price"
+              path="fuel-calc/price"
               element={
                 <PriceCalcPage
                   appDataState={appDataState}
@@ -215,7 +219,7 @@ const App: React.FC = () => {
               }
             />
             <Route
-              path="/history"
+              path="fuel-calc/history"
               element={
                 <HistoryPage
                   clearStorageData={clearStorageData}
