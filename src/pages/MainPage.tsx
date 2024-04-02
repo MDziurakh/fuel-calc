@@ -32,6 +32,9 @@ const MainPage: React.FC<IMainPage> = (props) => {
 
   // console.log(appDataState);
   useEffect(() => {
+
+    
+
     ReactGA.send({
       hitType: "pageview",
       page: "/my-path",
