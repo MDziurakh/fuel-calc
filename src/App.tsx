@@ -191,7 +191,7 @@ const App: React.FC = () => {
         <div className="content">
           <Routes>
             <Route
-              path="fuel-calc/consumption"
+              path="fuel-calc/"
               element={
                 <MainPage
                   clearStorageData={clearStorageData}
