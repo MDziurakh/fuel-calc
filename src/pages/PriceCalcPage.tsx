@@ -34,8 +34,6 @@ const PriceCalcPage: React.FC<IPriceCalcPage> = ({
       ? +appDataState[appDataState.length - 1].consumption
       : "";
 
-  console.log(pathname);
-
   useEffect(() => {
     ReactGA.send({
       hitType: "pageview",

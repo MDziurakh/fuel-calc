@@ -2,9 +2,7 @@ import React, { Dispatch, useEffect } from "react";
 import { IConsumption, IFuelFormState } from "../App";
 import ConsumtionForm from "../components/ConsumtionForm/ConsumtionForm";
 import ReactGA from "react-ga4";
-
 import "./MainPage.scss";
-
 import { ReactComponent as Copy } from "../assets/icons/copy.svg";
 
 interface IMainPage {
@@ -18,29 +16,25 @@ interface IMainPage {
   onClickCopy: () => void;
 }
 
-const MainPage: React.FC<IMainPage> = (props) => {
-  const {
-    clearStorageData,
-    appDataState,
-    onSubmitHandler,
-    setFuelFormState,
-    consumption,
-    onClickCopy,
-    showCopyMessage,
-    fuelFormInputsData,
-  } = props;
-
-  // console.log(appDataState);
-  useEffect(() => {
-
-    
-
-    ReactGA.send({
-      hitType: "pageview",
-      page: "/my-path",
-      title: "Custom Title",
-    });
-  }, []);
+const MainPage: React.FC<IMainPage> = ({
+  appDataState,
+  clearStorageData,
+  consumption,
+  fuelFormInputsData,
+  onClickCopy,
+  onSubmitHandler,
+  setFuelFormState,
+  showCopyMessage,
+}) => {
+  useEffect(
+    () =>
+      ReactGA.send({
+        hitType: "pageview",
+        page: "/my-path",
+        title: "Custom Title",
+      }),
+    []
+  );
 
   return (
     <div className="main-page-wrapper wrapper">

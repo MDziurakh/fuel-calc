@@ -32,39 +32,34 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const dataFromStorage = localStorage.getItem("appDataState");
-    if (typeof dataFromStorage === "string") {
+
+    if (typeof dataFromStorage === "string")
       setAppDataState(JSON.parse(dataFromStorage));
-    }
   }, []);
 
   useEffect(() => {
-    if (appDataState.length) {
+    if (appDataState.length)
       localStorage.setItem("appDataState", JSON.stringify(appDataState));
-    } else {
-      localStorage.removeItem("appDataState");
-      setConsumption({ fuelConsumption: 0, priceResult: 0 });
-    }
+    else localStorage.removeItem("appDataState");
+    setConsumption({ fuelConsumption: 0, priceResult: 0 });
   }, [appDataState]);
 
   const onSubmitHandler = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (
-      !fuelFormState.fuel ||
-      !fuelFormState.distance ||
-      !fuelFormState.price
-    ) {
+    if (!fuelFormState.fuel || !fuelFormState.distance || !fuelFormState.price)
       return;
-    }
 
     let litrage = ((fuelFormState.fuel / fuelFormState.distance) * 100).toFixed(
       2
     );
+
     let price = (
       (fuelFormState.fuel / fuelFormState.distance) *
       100 *
       fuelFormState.price *
       (fuelFormState.distance / 100)
     ).toFixed(2);
+
     let res: IConsumption = { fuelConsumption: +litrage, priceResult: +price };
 
     const newData: {
@@ -103,11 +98,9 @@ const App: React.FC = () => {
           appDataState[appDataState.length - 1].distance
         }km ,price - ${consumption.priceResult}UAH`
       );
+
       setShowCopyMessage(true);
-      setTimeout(() => {
-        setShowCopyMessage(false);
-      }, 1300);
-    } else {
+      setTimeout(() => setShowCopyMessage(false), 1300);
     }
   };
 
@@ -119,10 +112,8 @@ const App: React.FC = () => {
       category: "remove data",
     });
 
-    if (!filteredData.length) {
-      setAppDataState([]);
-      return;
-    }
+    if (!filteredData.length) return setAppDataState([]);
+
     setAppDataState(filteredData);
   };
 

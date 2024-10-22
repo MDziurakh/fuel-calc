@@ -1,16 +1,13 @@
 import React, { useMemo } from "react";
-
 import { ReactComponent as Fuel } from "../../assets/icons/fuel.svg";
 import { ReactComponent as Distance } from "../../assets/icons/distance.svg";
 import { ReactComponent as Consumption } from "../../assets/icons/consumption.svg";
 import { ReactComponent as Close } from "../../assets/icons/close.svg";
-
 import { ReactComponent as Melting } from "../../assets/icons/melting.svg";
 import { ReactComponent as Raise } from "../../assets/icons/raise.svg";
 import { ReactComponent as Rolling } from "../../assets/icons/rolling.svg";
 import { ReactComponent as Upside } from "../../assets/icons/upside.svg";
 import { ReactComponent as Zany } from "../../assets/icons/zany.svg";
-
 import { IAllDataItem } from "../../App";
 
 interface ICalculationsList {
