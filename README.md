@@ -1,3 +1,3 @@
-Gas consumption calculator - https://mdziurakh.github.io/fuel-calc/
+Fuel consumption/price calculator - https://mdziurakh.github.io/fuel-calc/
 
-React, Typescript, Router, LocalStorage
+Stack: React, Typescript, React-Router, LocalStorage
